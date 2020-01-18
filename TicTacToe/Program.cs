@@ -18,12 +18,12 @@ namespace TicTacToe
 
             //Creates a new GameBoard
             GameBoard board = new GameBoard();
-            bool IsPlayers = true;
+            bool IsPlayersNotSeelected = true;
 
             Player _firstPlayer = new Player();
             Player _secondPlayer = new Player();
 
-            while (IsPlayers) 
+            while (IsPlayersNotSeelected) 
             {
 
                 // print out the main menu
@@ -86,7 +86,7 @@ namespace TicTacToe
                         _secondPlayer = Mapper.PlayerDALtoPlayer(_secondPlayerDAL, 2, '0');
 
                         // drop out of loop
-                        IsPlayers = false;
+                        IsPlayersNotSeelected = false;
                         break;
 
                     default:
