@@ -17,7 +17,9 @@ namespace TicTacToeUnitTest
             set { testContextInstance = value; }
         }
 
-        public UnitTestTicTacToe() {
+        // constructor
+        public UnitTestTicTacToe() 
+        {
 
             CharArray3By3 = new char[3, 3];
 
@@ -77,6 +79,7 @@ namespace TicTacToeUnitTest
             }
 
             // act
+            // calculate the total
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)

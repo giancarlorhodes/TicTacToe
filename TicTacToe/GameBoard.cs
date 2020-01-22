@@ -483,7 +483,8 @@
             foreach (var _player in inList)
             {
                 Console.Write(_player.PlayerID.ToString().PadRight(10) + _player.FirstName.ToString().PadRight(20) + 
-                    _player.LastName.ToString().PadRight(20) + _player.Birthdate.ToString("MM/dd/yyyy").PadRight(20) + _player.Gender + "\n");
+                    _player.LastName.ToString().PadRight(20) + _player.Birthdate.ToString("MM/dd/yyyy").PadRight(20) 
+                    + _player.Gender + "\n");
                               
             }
 

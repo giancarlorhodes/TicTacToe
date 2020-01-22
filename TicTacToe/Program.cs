@@ -18,16 +18,18 @@ namespace TicTacToe
 
             //Creates a new GameBoard
             GameBoard board = new GameBoard();
-            bool IsPlayersNotSeelected = true;
+            bool IsPlayersNotSelected = true;
 
             Player _firstPlayer = new Player();
             Player _secondPlayer = new Player();
 
-            while (IsPlayersNotSeelected) 
+            while (IsPlayersNotSelected) 
             {
 
                 // print out the main menu
-                Console.WriteLine("Menu (L) - List all players, (S) Select players for the game, (A) - Add Player, (D) - Delete Player, (U) - Update Player");
+                Console.WriteLine("Menu (L) - List all players, (S) Select players for the game, (A) - Add Player, " +
+                    "(D) - Delete Player, (U) - Update Player");
+
                 string _menuItemPicked = Console.ReadLine();
 
                 // what does the user want to do
@@ -53,9 +55,28 @@ namespace TicTacToe
                         _dal.AddPlayer(_newPlayer);
                         break;
 
+
+                    case "D":
+                        // print out the list for them of they player ids
+                        Console.WriteLine("Please enter player id you want to delete for the game.");
+                        int _getAllPlayers = 0;
+                        _listOfPlayers = _dal.GetAllPlayers(_getAllPlayers);
+
+                        // print out the board
+                        board.PrintPlayers(_listOfPlayers);
+
+                        // the get the player id
+                        int _playerId = Convert.ToInt32(Console.ReadLine());
+
+                        //delete the player and their stats
+                        _dal.DeletePlayer(_playerId);
+
+                        break;
+
                     case "L": // list all the players in
                         int _playerIDToGet = 0;
                         _listOfPlayers = _dal.GetAllPlayers(_playerIDToGet);
+                        // uses the list
                         board.PrintPlayers(_listOfPlayers);
                         break;
 
@@ -63,7 +84,7 @@ namespace TicTacToe
                     case "S":
                         // print out the list for them of they player ids
                         Console.WriteLine("Please look at the list of available players, enter two player ids for the game.");
-                        int _getAllPlayers = 0;
+                        _getAllPlayers = 0;
                         _listOfPlayers = _dal.GetAllPlayers(_getAllPlayers);
 
                         // print out the board
@@ -86,7 +107,7 @@ namespace TicTacToe
                         _secondPlayer = Mapper.PlayerDALtoPlayer(_secondPlayerDAL, 2, '0');
 
                         // drop out of loop
-                        IsPlayersNotSeelected = false;
+                        IsPlayersNotSelected = false;
                         break;
 
                     default:
@@ -140,7 +161,7 @@ namespace TicTacToe
                 _currentPlayer = board.TwoPlayers[_currentPlayerIndex];
                 // need player to pick a location
                 Console.WriteLine(_currentPlayer.Name + ", please pick a location 1 to 9 that is not already occupied");
-                board.Print();
+             
                 Console.Write("Location: ");
                 string position = Console.ReadLine();
 
@@ -174,6 +195,8 @@ namespace TicTacToe
                 board.Place(charToPlace, Convert.ToInt32(position));
 
 
+                // print it
+                board.Print();
 
                 // check if it's a winner or draw, if not flip the player
                 string result =  board.CheckForWinnerOrDraw();
@@ -214,10 +237,6 @@ namespace TicTacToe
 
 
             }  // game loop
-
-
-
-
 
             //Stops the program
             Console.WriteLine("Game Over");

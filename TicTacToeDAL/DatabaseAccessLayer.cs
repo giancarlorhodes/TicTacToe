@@ -90,19 +90,49 @@
             return _returnList;
         }
 
+        public void DeletePlayer(int inPlayerId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(DbConnection))
+                {
+                    using (SqlCommand command = new SqlCommand("sp_delete_player", conn))
+                    {
+
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandTimeout = 45;
+                        conn.Open();
+
+                        // all my parameters
+                        command.Parameters.AddWithValue("@parm_playerid", SqlDbType.Int).Value = inPlayerId;
+                    
+                        // this runs the  stored procedure against the db
+                        command.ExecuteNonQuery();
+
+                    }
+
+                   conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+               throw ex;
+            }
+        }
+
         public void AddPlayer(PlayerDAL inPlayerDAL)
         {
 
             try
             {
-                using (SqlConnection connAdd = new SqlConnection(DbConnection))
+                using (SqlConnection conn = new SqlConnection(DbConnection))
                 {
-                    using (SqlCommand command = new SqlCommand("sp_insert_player", connAdd))
+                    using (SqlCommand command = new SqlCommand("sp_insert_player", conn))
                     {
 
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.CommandTimeout = 45;
-                        connAdd.Open();
+                        conn.Open();
 
                         // all my parameters
                         command.Parameters.AddWithValue("@parm_firstname", SqlDbType.VarChar).Value = inPlayerDAL.FirstName;
@@ -127,7 +157,7 @@
 
 
 
-                    connAdd.Close();
+                    conn.Close();
                 }
             }
             catch (Exception ex)
