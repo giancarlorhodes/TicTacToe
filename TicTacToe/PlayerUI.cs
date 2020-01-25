@@ -7,7 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Player
+    public class PlayerUI
     {
         // name of the player
         public string Name { get; set; }
@@ -18,14 +18,14 @@
         // this is the char they are using
         public char Token { get; set; }
 
-        public Player(string inName, int inPosition, char inToken)
+        public PlayerUI(string inName, int inPosition, char inToken)
         {
             this.Name = inName;
             this.Position = inPosition;
             this.Token = inToken;
         }
 
-        public Player()
+        public PlayerUI()
         {
         }
     }

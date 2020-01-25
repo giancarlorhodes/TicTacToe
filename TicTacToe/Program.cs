@@ -1,29 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TicTacToeCommon;
+using TicTacToeCommon.Interfaces;
 using TicTacToeDAL;
 
 namespace TicTacToe
 {
     class Program
     {
+
+        // fields
+        private readonly IUserReader _userReader;
+
+        // properties
+
+        // You’d have to look into whatever injection system you’re using. But do note that 
+        // static methods aren’t called by instance so there’s never an object created 
+        // nor a constructor called. – Sami Kuhmonen Dec 23 '18 at 8:33
+
+
+        // constructor dependency injection
+        public Program(IUserReader inIUserReader) 
+        {
+            _userReader = inIUserReader;
+        
+        }
+
+
+
         static void Main(string[] args)
         {
-            //Title of game
-            Console.WriteLine("Welcome to Tic-Tac-Toe");
+            // dependency on the ServiceReader class 
+            IUserReader _IUserReader = new ServiceReader();
+            var program = new Program(_IUserReader);
 
+            // Constructor injection in console application
+            // https://stackoverflow.com/questions/53902234/constructor-injection-in-console-application
+            program.Invoke();
+
+        }
+
+        // the bulk of the desired functionality should be refactored into a 
+        // method that will be invoked once the class has been initialized.
+        public void Invoke()
+        {
+
+            // declare local variables
             // this will used to determine which DAL method I need to call
             DatabaseAccessLayer _dal = new DatabaseAccessLayer();
-            List<PlayerDAL> _listOfPlayers;
+            List<Player> _listOfPlayers;
 
-            //Creates a new GameBoard
+            // Title of game
+            Console.WriteLine("Welcome to Tic-Tac-Toe");
+
+            // Creates a new GameBoard
             GameBoard board = new GameBoard();
             bool IsPlayersNotSelected = true;
 
-            Player _firstPlayer = new Player();
-            Player _secondPlayer = new Player();
+            PlayerUI _firstPlayer = new PlayerUI();
+            PlayerUI _secondPlayer = new PlayerUI();
 
-            while (IsPlayersNotSelected) 
+            while (IsPlayersNotSelected)
             {
 
                 // print out the main menu
@@ -48,11 +86,13 @@ namespace TicTacToe
                         string _genderInput = Console.ReadLine();
 
                         // constructor
-                        PlayerDAL _newPlayer = new PlayerDAL(_firstNameInput, _lastNameInput,
-                            _birthdateInput, _genderInput);
+                        Player _newPlayer = new Player(_firstNameInput, _lastNameInput,
+                        _birthdateInput, _genderInput);
 
                         // pass all value thru the object reference
-                        _dal.AddPlayer(_newPlayer);
+                        //_dal.AddPlayer(_newPlayer); // OLD CODE REMOVE
+                        _userReader.AddUser(_newPlayer); // NEW TODO IMPLEMENT
+                        
                         break;
 
 
@@ -97,10 +137,10 @@ namespace TicTacToe
                         int secondPlayerId = Convert.ToInt32(Console.ReadLine());
 
                         // write some LINQ to get player one and create object for that player
-                        PlayerDAL _firstPlayerDAL = _listOfPlayers.Where(x => x.PlayerID == firstPlayerId).FirstOrDefault();
+                        Player _firstPlayerDAL = _listOfPlayers.Where(x => x.PlayerID == firstPlayerId).FirstOrDefault();
 
                         // write some LINQ to get player two and create object for that player
-                        PlayerDAL _secondPlayerDAL = _listOfPlayers.Where(x => x.PlayerID == secondPlayerId).FirstOrDefault();
+                        Player _secondPlayerDAL = _listOfPlayers.Where(x => x.PlayerID == secondPlayerId).FirstOrDefault();
 
                         // map these to player objects because that's what game play takes
                         _firstPlayer = Mapper.PlayerDALtoPlayer(_firstPlayerDAL, 1, 'X');
@@ -115,23 +155,9 @@ namespace TicTacToe
                 }
 
             } // while end
-    
+
 
             // continuing to game play
-
-
-            // OLD CODE
-            ////Gets the name of the first player
-            //Console.WriteLine("Player 1 will be X's and goes first");
-            //Console.Write("Player 1 enter name: ");
-            //string player1 = Console.ReadLine();
-
-            ////Gets the name of the second player
-            //Console.WriteLine("Player 2 will be O's and goes second");
-            //Console.Write("Player 1 enter name: ");
-            //string player2 = Console.ReadLine();
-
-          
 
             ////Creates a new GameBoard
             //GameBoard board = new GameBoard(first, second);
@@ -141,27 +167,22 @@ namespace TicTacToe
             Console.WriteLine("Players will pick a number between 1 and 9 to determnine where they will play");
 
             // prints out the rule board
-            //board.PrintRuleBoard();
-            //board.PrintNiceRuleBoard();
             board.Print();
-
-            // print out the empty board
-            // board.Print();
 
             // game play
 
             // need a loop to go back and forth between the players
             bool IsContinueGame = true; // will be switched to false on a draw or winner inside the loop
             //string currentPlayer = player1; // used to determine what will be stored in the array
-            Player _currentPlayer;
+            PlayerUI _currentPlayer;
             int _currentPlayerIndex = 0;
-            while (IsContinueGame) 
+            while (IsContinueGame)
             {
 
                 _currentPlayer = board.TwoPlayers[_currentPlayerIndex];
                 // need player to pick a location
                 Console.WriteLine(_currentPlayer.Name + ", please pick a location 1 to 9 that is not already occupied");
-             
+
                 Console.Write("Location: ");
                 string position = Console.ReadLine();
 
@@ -170,7 +191,7 @@ namespace TicTacToe
                 position = board.ValidateInput(position, _currentPlayer.Name);
 
                 bool validMove = false;
-                
+
                 // checks if the player made a valid move
                 while (validMove == false)
                 {
@@ -191,7 +212,7 @@ namespace TicTacToe
                 // do we place a X or O?
                 char charToPlace;
                 charToPlace = _currentPlayer.Token;
-             
+
                 board.Place(charToPlace, Convert.ToInt32(position));
 
 
@@ -199,7 +220,7 @@ namespace TicTacToe
                 board.Print();
 
                 // check if it's a winner or draw, if not flip the player
-                string result =  board.CheckForWinnerOrDraw();
+                string result = board.CheckForWinnerOrDraw();
 
 
                 switch (result)
@@ -224,7 +245,8 @@ namespace TicTacToe
                 {
                     _currentPlayerIndex = 1;
                 }
-                else {
+                else
+                {
                     _currentPlayerIndex = 0;
                 }
 
@@ -241,8 +263,8 @@ namespace TicTacToe
             //Stops the program
             Console.WriteLine("Game Over");
             Console.ReadLine();
+
         }
     }
-
   
 }

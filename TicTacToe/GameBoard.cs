@@ -3,12 +3,14 @@
 
     using System;
     using System.Collections.Generic;
+    using TicTacToeCommon;
+    using TicTacToeCommon.Interfaces;
     using TicTacToeDAL;
 
     public class GameBoard : IGameBoard
     {
         //This is the players for the game
-        public List<Player> TwoPlayers { get; set; }
+        public List<PlayerUI> TwoPlayers { get; set; }
 
         char[,] BoardState = new char[3, 3];
 
@@ -28,11 +30,11 @@
             }
 
 
-            TwoPlayers = new List<Player>();
+            TwoPlayers = new List<PlayerUI>();
         }
 
         //Constructor that takes two players
-        public GameBoard(Player inFirstPlayer, Player inSecondPlayer)
+        public GameBoard(PlayerUI inFirstPlayer, PlayerUI inSecondPlayer)
         {
             BoardState = new char[3, 3];
 
@@ -47,7 +49,7 @@
             }
 
             //instantiate TwoPlayer property
-            TwoPlayers = new List<Player>();
+            TwoPlayers = new List<PlayerUI>();
 
             //Add players to the list
             TwoPlayers.Add(inFirstPlayer);
@@ -220,7 +222,7 @@
             }
         }
 
-        internal void SetPlayers(Player inFirstPlayer, Player inSecondPlayer)
+        internal void SetPlayers(PlayerUI inFirstPlayer, PlayerUI inSecondPlayer)
         {
             this.TwoPlayers.Add(inFirstPlayer);
             this.TwoPlayers.Add(inSecondPlayer);
@@ -276,27 +278,6 @@
 
         }
 
-        //// OLD
-        //public void Print() {
-
-
-
-        //    //  print out the 3 x 3 array
-
-        //    // rows
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        // cells
-        //        for (int j = 0; j < 3; j++)
-        //        {
-        //            Console.Write(BoardState[i,j]);
-        //            Console.Write(" ");
-        //        }
-        //        Console.Write("\n");
-        //    }
-
-
-        //}
 
         public void Print()
         {
@@ -468,7 +449,7 @@
 
 
 
-        public void PrintPlayers(List<PlayerDAL> inList) 
+        public void PrintPlayers(List<Player> inList) 
         {
 
             Console.WriteLine();

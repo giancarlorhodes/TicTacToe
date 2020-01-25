@@ -44,9 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations.cs" />
-    <Compile Include="IGameBoard.cs" />
     <Compile Include="Mapper.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="PlayerUI.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +54,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TicTacToeCommon\TicTacToeCommon.csproj">
+      <Project>{9d247874-d6bc-4f43-a58a-88b099514de5}</Project>
+      <Name>TicTacToeCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TicTacToeDAL\TicTacToeDAL.csproj">
       <Project>{360304e1-03e1-4e15-9a73-2843f55ba184}</Project>
       <Name>TicTacToeDAL</Name>

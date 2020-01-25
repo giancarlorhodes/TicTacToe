@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{
 		schema_and_data.sql = schema_and_data.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeCommon", "TicTacToeCommon\TicTacToeCommon.csproj", "{9D247874-D6BC-4F43-A58A-88B099514DE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{1FF2F03D-0A5F-4CA2-82E5-88B270E87D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF2F03D-0A5F-4CA2-82E5-88B270E87D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF2F03D-0A5F-4CA2-82E5-88B270E87D39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D247874-D6BC-4F43-A58A-88B099514DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D247874-D6BC-4F43-A58A-88B099514DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D247874-D6BC-4F43-A58A-88B099514DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D247874-D6BC-4F43-A58A-88B099514DE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace TicTacToe
+﻿namespace TicTacToeCommon.Interfaces
 {
     public interface IGameBoard
     {
