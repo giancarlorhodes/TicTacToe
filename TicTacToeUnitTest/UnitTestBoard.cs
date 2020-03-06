@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TicTacToeUnitTest
 {
     [TestClass]
-    public class UnitTestTicTacToe
+    public class UnitTestBoard
     {
 
         public char[,] CharArray3By3 { get; set; }
@@ -18,7 +18,7 @@ namespace TicTacToeUnitTest
         }
 
         // constructor
-        public UnitTestTicTacToe() 
+        public UnitTestBoard() 
         {
 
             CharArray3By3 = new char[3, 3];

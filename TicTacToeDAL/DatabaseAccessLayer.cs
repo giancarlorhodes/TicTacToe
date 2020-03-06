@@ -30,8 +30,8 @@
                         conn.Open();
 
                         // all my parameters
-                        command.Parameters.AddWithValue("@parm_firstname", SqlDbType.VarChar).Value = inPlayerDAL.FirstName;
-                        command.Parameters.AddWithValue("@parm_lastname", SqlDbType.VarChar).Value = inPlayerDAL.LastName;
+                        command.Parameters.AddWithValue("@parm_firstname", SqlDbType.VarChar).Value = inPlayerDAL.PlayerFirstName;
+                        command.Parameters.AddWithValue("@parm_lastname", SqlDbType.VarChar).Value = inPlayerDAL.PlayerLastName;
                         //command.Parameters.AddWithValue("@parm_birthdate", SqlDbType.DateTime2).Value = inPlayerDAL.Birthdate; /*   MM/dd/yyyy  */
                         command.Parameters.Add("@parm_birthdate", SqlDbType.DateTime2).Value = inPlayerDAL.Birthdate;
 
@@ -87,9 +87,10 @@
                             {
                                 // get each row and each cell of data from db
                                 Player _player = new Player();
+                                _player.PlayerType = PlayerType.Human; // default type is human
                                 _player.PlayerID = Convert.ToInt32(reader["PlayerID"]);
-                                _player.FirstName = reader["FirstName"].ToString();
-                                _player.LastName = reader["LastName"].ToString();
+                                _player.PlayerFirstName = reader["FirstName"].ToString();
+                                _player.PlayerLastName = reader["LastName"].ToString();
 
                                 // if it's null, make the date min value for date, otherwise take the date
                                 // called a tertary , same as if..else

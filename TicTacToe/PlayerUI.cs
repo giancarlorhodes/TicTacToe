@@ -7,26 +7,28 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class PlayerUI
-    {
-        // name of the player
-        public string Name { get; set; }
+    //public class PlayerUI
+    //{
+    //    // name of the player
+    //    public string Name { get; set; }
 
-        // this 1 or 2 for player 1 and player 2
-        public int Position { get; set; }
+    //    // this 1 or 2 for player 1 and player 2
+    //    public int Position { get; set; }
 
-        // this is the char they are using
-        public char Token { get; set; }
+    //    // this is the char they are using
+    //    public char Token { get; set; }
 
-        public PlayerUI(string inName, int inPosition, char inToken)
-        {
-            this.Name = inName;
-            this.Position = inPosition;
-            this.Token = inToken;
-        }
 
-        public PlayerUI()
-        {
-        }
-    }
+      
+    //    public PlayerUI(string inName, int inPosition, char inToken)
+    //    {
+    //        this.Name = inName;
+    //        this.Position = inPosition;
+    //        this.Token = inToken;
+    //    }
+
+    //    public PlayerUI()
+    //    {
+    //    }
+    //}
 }

@@ -38,8 +38,8 @@ namespace TicTacToeDAL
                         conn.Open();
 
                         // all my parameters
-                        command.Parameters.AddWithValue("@parm_firstname", SqlDbType.VarChar).Value = inPlayerDAL.FirstName;
-                        command.Parameters.AddWithValue("@parm_lastname", SqlDbType.VarChar).Value = inPlayerDAL.LastName;
+                        command.Parameters.AddWithValue("@parm_firstname", SqlDbType.VarChar).Value = inPlayerDAL.PlayerFirstName;
+                        command.Parameters.AddWithValue("@parm_lastname", SqlDbType.VarChar).Value = inPlayerDAL.PlayerLastName;
                         //command.Parameters.AddWithValue("@parm_birthdate", SqlDbType.DateTime2).Value = inPlayerDAL.Birthdate; /*   MM/dd/yyyy  */
                         command.Parameters.Add("@parm_birthdate", SqlDbType.DateTime2).Value = inPlayerDAL.Birthdate;
 

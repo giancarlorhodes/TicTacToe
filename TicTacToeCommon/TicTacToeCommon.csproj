@@ -41,7 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotLogic.cs" />
+    <Compile Include="Enumerations.cs" />
     <Compile Include="Interfaces\IGameBoard.cs" />
+    <Compile Include="Interfaces\ITicTacToePlayer.cs" />
+    <Compile Include="Interfaces\ITicTacToeGame.cs" />
     <Compile Include="Interfaces\IUserReader.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

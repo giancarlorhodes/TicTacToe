@@ -11,15 +11,15 @@ namespace TicTacToe
     internal static class Mapper
     {
 
-        internal static PlayerUI PlayerDALtoPlayer(Player inPlayer, int inPosition, char inToken)
-        {
+        //internal static PlayerUI PlayerDALtoPlayer(Player inPlayer, int inPosition, char inToken)
+        //{
 
-            PlayerUI _playerReturned = new PlayerUI();
-            _playerReturned.Name = inPlayer.FirstName + " "  + inPlayer.LastName;
-            _playerReturned.Position = inPosition;
-            _playerReturned.Token = inToken;
-            return _playerReturned;
-        }
+        //    PlayerUI _playerReturned = new PlayerUI();
+        //    _playerReturned.Name = inPlayer.FirstName + " "  + inPlayer.LastName;
+        //    _playerReturned.Position = inPosition;
+        //    _playerReturned.Token = inToken;
+        //    return _playerReturned;
+        //}
 
 
     }

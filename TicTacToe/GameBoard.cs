@@ -10,9 +10,9 @@
     public class GameBoard : IGameBoard
     {
         //This is the players for the game
-        public List<PlayerUI> TwoPlayers { get; set; }
+        public List<Player> TwoPlayers { get; set; }
 
-        char[,] BoardState = new char[3, 3];
+        public char[,] BoardState = new char[3, 3];
 
         //Default empty constructor
         public GameBoard()
@@ -30,11 +30,11 @@
             }
 
 
-            TwoPlayers = new List<PlayerUI>();
+            TwoPlayers = new List<Player>();
         }
 
         //Constructor that takes two players
-        public GameBoard(PlayerUI inFirstPlayer, PlayerUI inSecondPlayer)
+        public GameBoard(Player inFirstPlayer, Player inSecondPlayer)
         {
             BoardState = new char[3, 3];
 
@@ -49,7 +49,7 @@
             }
 
             //instantiate TwoPlayer property
-            TwoPlayers = new List<PlayerUI>();
+            TwoPlayers = new List<Player>();
 
             //Add players to the list
             TwoPlayers.Add(inFirstPlayer);
@@ -222,7 +222,7 @@
             }
         }
 
-        internal void SetPlayers(PlayerUI inFirstPlayer, PlayerUI inSecondPlayer)
+        internal void SetPlayers(Player inFirstPlayer, Player inSecondPlayer)
         {
             this.TwoPlayers.Add(inFirstPlayer);
             this.TwoPlayers.Add(inSecondPlayer);
@@ -457,15 +457,15 @@
             // print header
             //1-->10 11-->30 31-->50 51-->70
 
-            Console.WriteLine("PlayerID  FirstName           LastName            BirthDate           Gender");
+            Console.WriteLine("PlayerID  FirstName           LastName            BirthDate           Gender              Type");
 
 
             // print the list of players
             foreach (var _player in inList)
             {
-                Console.Write(_player.PlayerID.ToString().PadRight(10) + _player.FirstName.ToString().PadRight(20) + 
-                    _player.LastName.ToString().PadRight(20) + _player.Birthdate.ToString("MM/dd/yyyy").PadRight(20) 
-                    + _player.Gender + "\n");
+                Console.Write(_player.PlayerID.ToString().PadRight(10) + _player.PlayerFirstName.ToString().PadRight(20) + 
+                    _player.PlayerLastName.ToString().PadRight(20) + _player.Birthdate.ToString("MM/dd/yyyy").PadRight(20) 
+                    + _player.Gender.ToString().PadRight(20) + _player.PlayerType.ToString() + "\n");
                               
             }
 

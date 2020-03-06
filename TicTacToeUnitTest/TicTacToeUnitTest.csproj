@@ -49,11 +49,22 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTestTicTacToe.cs" />
+    <Compile Include="UnitTestBotLogic.cs" />
+    <Compile Include="UnitTestBoard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToeCommon\TicTacToeCommon.csproj">
+      <Project>{9d247874-d6bc-4f43-a58a-88b099514de5}</Project>
+      <Name>TicTacToeCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicTacToe\TicTacToe.csproj">
+      <Project>{db9357b5-62e7-4045-b18c-37f0d537b3ae}</Project>
+      <Name>TicTacToe</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
