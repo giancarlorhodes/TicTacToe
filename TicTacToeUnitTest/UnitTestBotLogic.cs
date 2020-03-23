@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TicTacToe;
 using TicTacToeCommon;
+using TicTacToeCommon.Interfaces;
 
 
 namespace TicTacToeUnitTest
@@ -11,7 +12,7 @@ namespace TicTacToeUnitTest
     public class UnitTestBotLogic
     {
         // fields
-        private BotLogic _botLogic;
+        private IBotLogic _botLogic;
         private GameBoard _gameBoard;
         private Player _player;
 
@@ -48,12 +49,30 @@ namespace TicTacToeUnitTest
             string _actual = "";        
             _gameBoard.BoardState[0, 0] = 'O';
             _gameBoard.BoardState[2, 2] = 'O';
+ 
 
             // act
             _actual = _botLogic.Analyze(_gameBoard.BoardState, _player);
 
             // assert
             Assert.AreEqual(_expected, _actual);        
+        }
+
+        [TestMethod]
+        public void PreventLoss_Diagonal_1_and_9_Already_Blocked_At_5()
+        {
+            // arrange
+            string _expected = null;
+            string _actual = "not null";
+            _gameBoard.BoardState[0, 0] = 'O';
+            _gameBoard.BoardState[2, 2] = 'O';
+            _gameBoard.BoardState[1, 1] = 'X';
+
+            // act
+            _actual = _botLogic.Analyze(_gameBoard.BoardState, _player);
+
+            // assert
+            Assert.AreEqual(_expected, _actual);
         }
 
 
@@ -73,6 +92,21 @@ namespace TicTacToeUnitTest
             Assert.AreEqual(_expected, _actual);
         }
 
+        [TestMethod]
+        public void PreventLoss_Diagonal_7_and_3_Already_Blocked_At_5()
+        {
+            // arrange
+            string _actual = "not null";
+            _gameBoard.BoardState[2, 0] = 'O';
+            _gameBoard.BoardState[0, 2] = 'O';
+            _gameBoard.BoardState[1, 1] = 'X';
+
+            // act
+            _actual = _botLogic.Analyze(_gameBoard.BoardState, _player);
+
+            // assert
+            Assert.IsNull(_actual);
+        }
 
         [TestMethod]
         public void PreventLoss_Diagonal_1_and_5_Block_At_9()
@@ -439,6 +473,103 @@ namespace TicTacToeUnitTest
 
             // assert
             Assert.AreEqual(_expected, _actual);
+        }
+
+
+        [TestMethod]
+        public void WeightTheBoard_X_5_O_6() 
+        {
+            // arrange
+            GameBoard _gameBoard = new GameBoard();
+            _gameBoard.BoardState[1, 2] = 'O';
+            _gameBoard.BoardState[1, 1] = 'X';
+          
+            int[,] _expected = new int[3, 3] { 
+                { 1, 1, 1 }, 
+                { 1, 2, -1 }, 
+                { 1, 1, 1 } 
+            };
+
+            // act
+            int[,] _actual = _botLogic.WeightTheBoard(_gameBoard.BoardState, _player);
+
+            // assert
+            CollectionAssert.AreEqual(_expected, _actual);
+        }
+
+
+        [TestMethod]
+        public void WeightTheBoard_X_7_5_O_6()
+        {
+
+           // arrange
+            GameBoard _gameBoard = new GameBoard();
+            _gameBoard.BoardState[2, 0] = 'X';
+            _gameBoard.BoardState[1, 1] = 'X';
+            _gameBoard.BoardState[1, 2] = 'O';
+
+            int[,] _expected = new int[3, 3] {
+                { 1, 1, 1 },
+                { 1, 2, -1 },
+                { 2, 1, 1 }
+            };
+
+            // act
+            int[,] _actual = _botLogic.WeightTheBoard(_gameBoard.BoardState, _player);
+
+            // assert
+            CollectionAssert.AreEqual(_expected, _actual);
+        }
+
+
+
+
+        [TestMethod]
+        public void WeightTheBoard_O_7_5_X_6_Player_Is_O()
+        {
+
+            // arrange
+            GameBoard _gameBoard = new GameBoard();
+            _gameBoard.BoardState[2, 0] = 'O';
+            _gameBoard.BoardState[1, 1] = 'O';
+            _gameBoard.BoardState[1, 2] = 'X';
+            _player.PlayerToken = 'O';
+
+            int[,] _expected = new int[3, 3] {
+                { 1, 1, 1 },
+                { 1, 2, -1 },
+                { 2, 1, 1 }
+            };
+
+            // act
+            int[,] _actual = _botLogic.WeightTheBoard(_gameBoard.BoardState, _player);
+
+            // assert
+            CollectionAssert.AreEqual(_expected, _actual);
+        }
+
+        [TestMethod]
+        public void WeightTheBoard_O_7_5_X_6_Player_Is_X()
+        {
+
+            // arrange
+            GameBoard _gameBoard = new GameBoard();
+            _gameBoard.BoardState[2, 0] = 'O';
+            _gameBoard.BoardState[1, 1] = 'O';
+            _gameBoard.BoardState[1, 2] = 'X';
+            _player.PlayerToken = 'X';
+
+            int[,] _expected = new int[3, 3] {
+                { 1, 1, 1 },
+                { 1, -1, 2 },
+                { -1, 1, 1 }
+            };
+
+            // act
+            int[,] _actual = _botLogic.WeightTheBoard(_gameBoard.BoardState, _player);
+
+            // assert
+            CollectionAssert.AreEqual(_expected, _actual);
         }
 
 

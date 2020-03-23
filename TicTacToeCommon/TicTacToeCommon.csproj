@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BotLogic.cs" />
     <Compile Include="Enumerations.cs" />
+    <Compile Include="Interfaces\IBotLogic.cs" />
     <Compile Include="Interfaces\IGameBoard.cs" />
     <Compile Include="Interfaces\ITicTacToePlayer.cs" />
     <Compile Include="Interfaces\ITicTacToeGame.cs" />

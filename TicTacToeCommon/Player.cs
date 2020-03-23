@@ -61,40 +61,40 @@ namespace TicTacToeCommon
         public string BotMove(char[,] inBoardState)
         {
             BotLogic _botLogic = new BotLogic();
-            Random _random = new Random();
+            //Random _random = new Random();
             string _position = "";
 
-            //1-5 = 2, 6-10 = 4, 11-15 = 6, 16-20 = 8, 21-100 = center
-            // if first by bot, then go on offense
-            if (_botLogic.IsFirstMove(inBoardState))
-            {
-                int _somenumber = _random.Next(1, 101);
-                if (_somenumber >= 1 && _somenumber <= 5)
-                {
-                    _position = "2";
-                }
-                else if (_somenumber >= 6 && _somenumber <= 10)
-                {
-                    _position = "4";
-                }
-                else if (_somenumber >= 11 && _somenumber <= 15)
-                {
-                    _position = "6";
-                }
-                else if (_somenumber >= 16 && _somenumber <= 20)
-                {
-                    _position = "8";
-                }
-                else
-                {
-                    _position = "5";
-                }
-            }
-            else
-            {
-                // analyze board
+            ////1-5 = 2, 6-10 = 4, 11-15 = 6, 16-20 = 8, 21-100 = center
+            //// if first by bot, then go on offense
+            //if (_botLogic.IsFirstMove(inBoardState))
+            //{
+            //    int _somenumber = _random.Next(1, 101);
+            //    if (_somenumber >= 1 && _somenumber <= 5)
+            //    {
+            //        _position = "2";
+            //    }
+            //    else if (_somenumber >= 6 && _somenumber <= 10)
+            //    {
+            //        _position = "4";
+            //    }
+            //    else if (_somenumber >= 11 && _somenumber <= 15)
+            //    {
+            //        _position = "6";
+            //    }
+            //    else if (_somenumber >= 16 && _somenumber <= 20)
+            //    {
+            //        _position = "8";
+            //    }
+            //    else
+            //    {
+            //        _position = "5";
+            //    }
+            //}
+            //else
+            //{
+            //    // analyze board
                 _position = _botLogic.Analyze(inBoardState, this);
-            }
+            //}
 
 
             return _position;
